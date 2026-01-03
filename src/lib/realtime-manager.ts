@@ -81,6 +81,7 @@ export async function subscribeToChannel(
 
 /**
  * Actually subscribe to the channel once and setup message routing
+ * Handles timeout errors gracefully since realtime is non-critical
  */
 async function subscribeChannelOnce(channelState: ChannelState): Promise<void> {
   try {
@@ -98,9 +99,19 @@ async function subscribeChannelOnce(channelState: ChannelState): Promise<void> {
         }
       }
     })
-  } catch (error) {
+  } catch (error: any) {
     channelState.isSubscribed = false
-    throw error
+    
+    // Handle subscription timeout gracefully - realtime is non-critical
+    // Components have fallback mechanisms (polling/caching)
+    if (error?.name === 'BlinkRealtimeError' && 
+        error?.message?.includes('timeout')) {
+      console.warn(`Realtime subscription timeout (non-critical), falling back to polling`)
+      return // Don't throw - allow components to continue without realtime
+    }
+    
+    // For other errors, log but don't throw - realtime is enhancement, not critical
+    console.warn(`Realtime subscription failed (non-critical):`, error?.message || error)
   }
 }
 

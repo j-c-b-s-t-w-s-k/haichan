@@ -25,21 +25,18 @@ export function BoardsToolbar() {
       await loadBoards()
       
       // Setup real-time subscription for instant updates
-      try {
-        unsubscribe = await subscribeToChannel(
-          'boards-updates',
-          'boards-toolbar',
-          (message: any) => {
-            if (message.type === 'board-created' || message.type === 'board-updated' || message.type === 'board-deleted') {
-              // Invalidate cache and reload instantly
-              requestCache.invalidate('toolbar-boards')
-              loadBoards()
-            }
+      // Real-time is non-critical enhancement - errors are handled gracefully in realtime-manager
+      unsubscribe = await subscribeToChannel(
+        'boards-updates',
+        'boards-toolbar',
+        (message: any) => {
+          if (message.type === 'board-created' || message.type === 'board-updated' || message.type === 'board-deleted') {
+            // Invalidate cache and reload instantly
+            requestCache.invalidate('toolbar-boards')
+            loadBoards()
           }
-        )
-      } catch (error) {
-        console.error('Failed to setup boards real-time:', error)
-      }
+        }
+      )
     }
     
     initializeData()
