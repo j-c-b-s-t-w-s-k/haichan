@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { ArrowLeft, Bell, Check, Trash2 } from 'lucide-react'
 import { Button } from '../components/ui/button'
 import { Card, CardContent } from '../components/ui/card'
 import db from '../lib/db-client'
 import { useAuth } from '../contexts/AuthContext'
 import toast from 'react-hot-toast'
-import { processRichText } from '../lib/rich-text'
 
 export function NotificationsPage() {
   const navigate = useNavigate()

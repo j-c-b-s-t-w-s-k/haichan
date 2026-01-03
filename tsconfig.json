@@ -19,7 +19,7 @@
     "noUnusedParameters": false,
     "noImplicitAny": false,
     "strictNullChecks": false,
-    "noFallthroughCasesInSwitch": false,
+    "noFallthroughCasesInSwitch": true,
     "skipDefaultLibCheck": true,
     "noImplicitReturns": false,
     "noPropertyAccessFromIndexSignature": false,
@@ -27,7 +27,7 @@
     "noUncheckedIndexedAccess": false,
     "noImplicitOverride": false,
     "allowUnreachableCode": true,
-    "allowUnusedLabels": true,
+    "allowUnusedLabels": false,
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]

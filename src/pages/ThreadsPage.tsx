@@ -1,12 +1,11 @@
 import { useState, useEffect, useRef } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { ChevronLeft, TrendingUp, LayoutGrid, LayoutList, Search, ArrowUpDown } from 'lucide-react'
+import { TrendingUp, LayoutGrid, LayoutList, Search } from 'lucide-react'
 import { useMouseoverMining, useMining } from '../hooks/use-mining'
 import { useRealtimeListener } from '../hooks/use-realtime-subscription'
 import { MiningProgressBadge } from '../components/ui/mining-progress-badge'
 import { BoardCatalog } from '../components/views/BoardCatalog'
 import { PostersFilter } from '../components/views/PostersFilter'
-import { Button } from '../components/ui/button'
 import db from '../lib/db-client'
 import { Input } from '../components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../components/ui/select"
@@ -67,7 +66,6 @@ export function ThreadsPage() {
   const [board, setBoard] = useState<any>(null)
   const [threads, setThreads] = useState<any[]>([])
   const [filteredThreads, setFilteredThreads] = useState<any[]>([])
-  const [replyCountMap, setReplyCountMap] = useState<{ [threadId: string]: number }>({})
   const [loading, setLoading] = useState(true)
   const [viewMode, setViewMode] = useState<'list' | 'catalog'>('catalog')
   const [selectedPosters, setSelectedPosters] = useState<string[] | null>(null)

@@ -6,7 +6,7 @@
 
 import { createContext, useContext, useEffect, useState, useCallback, ReactNode } from 'react'
 import db from '../lib/db-client'
-import { AuthState, DbUser, LoginCredentials, RegisterPayload, AuthContextType } from '../types/auth'
+import { AuthState, DbUser, RegisterPayload, AuthContextType } from '../types/auth'
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 

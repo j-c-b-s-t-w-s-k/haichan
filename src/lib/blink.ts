@@ -1,8 +1,8 @@
 import { createClient } from '@blinkdotnew/sdk'
 
 export const blink = createClient({
-  projectId: import.meta.env.VITE_BLINK_PROJECT_ID || 'haichan-pow-imageboard-7e3gh26u',
-  publishableKey: import.meta.env.VITE_BLINK_PUBLISHABLE_KEY,
+  projectId: 'haichan-pow-imageboard-7e3gh26u',
+  authRequired: false,
   auth: {
     mode: 'headless'
   }

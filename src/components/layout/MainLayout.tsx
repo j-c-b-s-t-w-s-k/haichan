@@ -8,7 +8,7 @@ import { Button } from '../ui/button'
 import { BottomToolbar } from './BottomToolbar'
 import { BoardsToolbar } from './BoardsToolbar'
 import { BadgesInline } from '../../lib/badge-utils'
-import { Layers, BookOpen, Pickaxe, User, LogOut, Trophy, Ticket, MessageSquare, Image, Settings, Shield, Users, Zap, Menu, X, Scroll, ChevronDown, Palette, Bell, Hash, Home, Sparkles } from 'lucide-react'
+import { Layers, BookOpen, Pickaxe, Trophy, MessageSquare, Image, Settings, Shield, Users, Zap, Menu, X, Scroll, ChevronDown, Palette, Hash, Home, Sparkles } from 'lucide-react'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,10 +18,10 @@ import {
 } from '../ui/dropdown-menu'
 import { useAuth } from '../../contexts/AuthContext'
 import toast from 'react-hot-toast'
-import { POW_ESTIMATED_TIME } from '../../lib/constants'
 import { formatBrandName } from '../../lib/utils'
 import { MiningManager } from '../../lib/mining/MiningManager'
 import db from '../../lib/db-client'
+import { NexusNav } from '../NexusNav'
 
 export function MainLayout() {
   const { authState, dbUser, signOut } = useAuth()
@@ -32,7 +32,6 @@ export function MainLayout() {
   const keydownListenerRef = useRef<((e: KeyboardEvent) => void) | null>(null)
   const navigate = useNavigate()
 
-  const isAuthenticated = authState.isAuthenticated
   const user = authState.user
 
   // Keyboard shortcut for mining (M key) - only for authenticated users
@@ -297,7 +296,7 @@ export function MainLayout() {
             </button>
 
             <div className="flex items-center gap-2 text-xs">
-              
+              <NexusNav />
               {user ? (
                 <>
                   <div className="hidden md:flex items-center gap-1">

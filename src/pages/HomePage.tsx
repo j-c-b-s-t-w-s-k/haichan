@@ -50,39 +50,45 @@ export function HomePage() {
     let unsubscribeUsers: (() => void) | null = null
     
     const setupRealtimeBoards = async () => {
-      // Real-time is non-critical enhancement - errors are handled gracefully in realtime-manager
-      unsubscribeBoards = await subscribeToChannel(
-        'boards-updates',
-        'homepage-boards',
-        (message: any) => {
-          if (message.type === 'board-created' || message.type === 'board-updated' || message.type === 'board-deleted') {
-            // Invalidate cache and reload instantly
-            requestCache.invalidate('homepage-boards')
-            loadBoards()
+      try {
+        unsubscribeBoards = await subscribeToChannel(
+          'boards-updates',
+          'homepage-boards',
+          (message: any) => {
+            if (message.type === 'board-created' || message.type === 'board-updated' || message.type === 'board-deleted') {
+              // Invalidate cache and reload instantly
+              requestCache.invalidate('homepage-boards')
+              loadBoards()
+            }
           }
-        }
-      )
+        )
+      } catch (error) {
+        console.error('Failed to setup boards real-time:', error)
+      }
     }
     
     const setupRealtimeUsers = async () => {
-      // Real-time is non-critical enhancement - errors are handled gracefully in realtime-manager
-      unsubscribeUsers = await subscribeToChannel(
-        'users-activity',
-        'homepage-users',
-        (message: any) => {
-          if (message.type === 'user-activity') {
-            // Invalidate cache and reload online users instantly
-            requestCache.invalidate('homepage-online-users')
-            loadOnlineUsers()
+      try {
+        unsubscribeUsers = await subscribeToChannel(
+          'users-activity',
+          'homepage-users',
+          (message: any) => {
+            if (message.type === 'user-activity') {
+              // Invalidate cache and reload online users instantly
+              requestCache.invalidate('homepage-online-users')
+              loadOnlineUsers()
+            }
+            if (message.type === 'user-joined' || message.type === 'user-registered') {
+              // Reload newest user and total count instantly
+              requestCache.invalidatePattern(/homepage-(newest-user|total-users)/)
+              loadNewestUser()
+              loadTotalUsers()
+            }
           }
-          if (message.type === 'user-joined' || message.type === 'user-registered') {
-            // Reload newest user and total count instantly
-            requestCache.invalidatePattern(/homepage-(newest-user|total-users)/)
-            loadNewestUser()
-            loadTotalUsers()
-          }
-        }
-      )
+        )
+      } catch (error) {
+        console.error('Failed to setup users real-time:', error)
+      }
     }
     
     initializeData()

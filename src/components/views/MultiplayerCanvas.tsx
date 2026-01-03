@@ -24,8 +24,6 @@ import {
   Upload,
   Circle,
   Star,
-  ChevronDown,
-  ChevronUp
 } from 'lucide-react'
 import db from '../../lib/db-client'
 import toast from 'react-hot-toast'
@@ -41,7 +39,7 @@ interface DrawAction {
   y?: number
   color?: string
   size?: number
-  tool?: 'brush' | 'eraser'
+  tool?: 'brush' | 'eraser' | 'stamp'
   userId: string
   timestamp: number
 }
@@ -72,9 +70,7 @@ export function MultiplayerCanvas() {
   const [history, setHistory] = useState<ImageData[]>([])
   const [historyStep, setHistoryStep] = useState(-1)
   const [backgroundImage, setBackgroundImage] = useState<string | null>(null)
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
-  const [showToolbar, setShowToolbar] = useState(true)
-  
+
   // Session management
   const [sessionActive, setSessionActive] = useState(false)
   const [sessionId, setSessionId] = useState('')

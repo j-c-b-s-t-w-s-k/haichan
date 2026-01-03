@@ -3,13 +3,10 @@ import { Link } from 'react-router-dom'
 import { TrendingUp, MessageCircle, User, Clock, Loader2 } from 'lucide-react'
 import { useMouseoverMining, useMining } from '../../hooks/use-mining'
 import { MiningProgressBadge } from '../ui/mining-progress-badge'
-import { DitheredImage } from '../ui/dithered-image'
 import { CircularOrbImage } from '../ui/circular-orb-image'
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '../ui/hover-card'
-import db from '../../lib/db-client'
 import { invokeFunction } from '../../lib/functions-utils'
 import { useAuth } from '../../contexts/AuthContext'
-import toast from 'react-hot-toast'
 
 interface ThreadCardProps {
   thread: any

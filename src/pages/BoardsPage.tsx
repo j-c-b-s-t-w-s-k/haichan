@@ -22,45 +22,48 @@ export function BoardsPage() {
       await loadBoards()
       
       // Setup real-time subscription for instant updates
-      // Real-time is non-critical enhancement - errors are handled gracefully in realtime-manager
-      unsubscribe = await subscribeToChannel(
-        'boards-updates',
-        'boards-page',
-        (message: any) => {
-          if (message.type === 'board-created' || message.type === 'board-updated' || message.type === 'board-deleted') {
-            // Invalidate cache and reload instantly
-            requestCache.invalidate('page-boards')
-            loadBoards()
-          }
-        }
-      )
-
-      // Listen for global PoW stats to update board totals live
-      const unsubscribePoW = await subscribeToChannel(
-        'global-stats-updates',
-        'boards-page-pow',
-        (message: any) => {
-          if (message.type === 'stats-updated') {
-            const { targetType, targetId, pointsAdded } = message.payload || message
-            
-            if (targetType === 'board') {
-              setBoards(prevBoards => 
-                prevBoards.map(board => 
-                  board.id === targetId 
-                    ? { ...board, totalPow: (board.totalPow || 0) + pointsAdded }
-                    : board
-                )
-              )
+      try {
+        unsubscribe = await subscribeToChannel(
+          'boards-updates',
+          'boards-page',
+          (message: any) => {
+            if (message.type === 'board-created' || message.type === 'board-updated' || message.type === 'board-deleted') {
+              // Invalidate cache and reload instantly
+              requestCache.invalidate('page-boards')
+              loadBoards()
             }
           }
+        )
+
+        // Listen for global PoW stats to update board totals live
+        const unsubscribePoW = await subscribeToChannel(
+          'global-stats-updates',
+          'boards-page-pow',
+          (message: any) => {
+            if (message.type === 'stats-updated') {
+              const { targetType, targetId, pointsAdded } = message.payload || message
+              
+              if (targetType === 'board') {
+                setBoards(prevBoards => 
+                  prevBoards.map(board => 
+                    board.id === targetId 
+                      ? { ...board, totalPow: (board.totalPow || 0) + pointsAdded }
+                      : board
+                  )
+                )
+              }
+            }
+          }
+        )
+        
+        // Chain unsubscribe
+        const oldUnsubscribe = unsubscribe
+        unsubscribe = () => {
+          oldUnsubscribe && oldUnsubscribe()
+          unsubscribePoW && unsubscribePoW()
         }
-      )
-      
-      // Chain unsubscribe
-      const oldUnsubscribe = unsubscribe
-      unsubscribe = () => {
-        oldUnsubscribe && oldUnsubscribe()
-        unsubscribePoW && unsubscribePoW()
+      } catch (error) {
+        console.error('Failed to setup boards real-time:', error)
       }
     }
     

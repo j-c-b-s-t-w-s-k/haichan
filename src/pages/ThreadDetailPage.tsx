@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
-import { ChevronLeft, TrendingUp, Trash2, MoreVertical, Shield, Zap, StopCircle, Loader2 } from 'lucide-react'
+import { ChevronLeft, Trash2, MoreVertical, Shield, Zap, Loader2 } from 'lucide-react'
 import { useMouseoverMining, useMining } from '../hooks/use-mining'
 import { useRealtimeListener } from '../hooks/use-realtime-subscription'
 import { isThreadLocked } from '../lib/pow-config'

@@ -13,7 +13,7 @@ import toast from 'react-hot-toast'
 
 export function SettingsPage() {
   const navigate = useNavigate()
-  const { authState, logout } = useAuth()
+  const { authState, signOut } = useAuth()
   const [settings, setSettings] = useState({
     ditheringEnabled: true,
     autoPlayGifs: true,
@@ -61,7 +61,7 @@ export function SettingsPage() {
           role: 'ghost'
         })
         toast.success('You are now a ghost.')
-        logout()
+        signOut()
         navigate('/')
       } catch (error) {
         toast.error('Failed to enter ghost mode')

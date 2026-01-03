@@ -35,11 +35,7 @@ export default defineConfig({
     strictPort: true,
     host: true,
     allowedHosts: true,
-    // Fix CORS and iframe issues
     headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
       'X-Content-Type-Options': 'nosniff',
     },
   }

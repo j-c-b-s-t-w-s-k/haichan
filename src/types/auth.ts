@@ -3,7 +3,21 @@
  * Centralized types for type safety across auth-related code
  */
 
-import { BlinkUser } from '@blinkdotnew/sdk'
+/**
+ * User object from Blink SDK auth
+ */
+export interface BlinkUser {
+  id: string
+  email: string
+  displayName?: string
+  photoURL?: string
+  emailVerified?: boolean
+  createdAt?: string
+  lastSignInAt?: string
+  role?: string
+  username?: string
+  isAdmin?: number | string
+}
 
 /**
  * The auth state object returned by onAuthStateChanged
