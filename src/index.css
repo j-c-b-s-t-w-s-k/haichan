@@ -1,0 +1,341 @@
+/* Font Families for Blog Theming + Serif for Aquatic 90s Aesthetic */
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Fira+Code:wght@300..700&family=IBM+Plex+Mono:ital,wght@0,100..700;1,100..700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Roboto+Slab:wght@100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=VT323&family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Fredoka+One&family=Permanent+Marker&family=Righteous&family=Cabin+Sketch:wght@400;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&display=swap');
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Classic 4chan Green Palette (Default "Haichan") */
+    /* Authentic 90s imageboard aesthetic with mint green text on dark background */
+    
+    --background: 0 0% 5%; /* Almost black background - iconic 4chan dark */
+    --foreground: 142 72% 56%; /* Mint Green text - classic 4chan color */
+    
+    --card: 0 0% 10%; /* Slightly lighter black for cards */
+    --card-foreground: 142 72% 56%; /* Mint green on cards */
+    
+    --popover: 0 0% 15%; /* Dark charcoal for overlays */
+    --popover-foreground: 142 72% 56%; /* Mint green on overlays */
+    
+    --primary: 142 72% 56%; /* Mint Green - iconic 4chan accent */
+    --primary-foreground: 0 0% 5%; /* Black on mint */
+    
+    --secondary: 160 87% 45%; /* Darker teal - secondary accent */
+    --secondary-foreground: 0 0% 95%;
+    
+    --muted: 0 0% 30%; /* Muted gray */
+    --muted-foreground: 0 0% 50%; /* Dimmed text */
+    
+    --accent: 142 72% 56%; /* Mint Green accent */
+    --accent-foreground: 0 0% 5%;
+    
+    --destructive: 0 88% 50%; /* Red for errors/warnings */
+    --destructive-foreground: 0 0% 95%;
+    
+    --border: 0 0% 25%; /* Subtle gray border */
+    --input: 0 0% 15%; /* Dark input backgrounds */
+    --ring: 142 72% 56%; /* Mint green ring focus */
+    
+    --radius: 0rem; /* Sharp corners - authentic 4chan style */
+    
+    --font-mono: 'JetBrains Mono', 'Courier Prime', Courier, monospace;
+    --font-serif: 'Fira Code', monospace;
+    
+    /* Sidebar matching 4chan theme */
+    --sidebar-background: 0 0% 8%;
+    --sidebar-foreground: 142 72% 56%;
+    --sidebar-primary: 142 72% 56%;
+    --sidebar-primary-foreground: 0 0% 5%;
+    --sidebar-accent: 142 72% 56%;
+    --sidebar-accent-foreground: 0 0% 5%;
+    --sidebar-border: 0 0% 25%;
+    --sidebar-ring: 142 72% 56%;
+    
+    --chart-1: 142 72% 56%; /* Mint Green */
+    --chart-2: 160 87% 45%; /* Teal */
+    --chart-3: 0 88% 50%; /* Red */
+    --chart-4: 120 100% 50%; /* Bright Green */
+    --chart-5: 50 100% 50%; /* Yellow */
+  }
+
+  /* Yotsuba (Light/Orange) */
+  [data-theme="yotsuba"] {
+    --background: 35 30% 96%; /* Cream */
+    --foreground: 0 0% 10%; /* Dark Text */
+    
+    --card: 35 30% 90%; /* Slightly darker cream */
+    --card-foreground: 0 0% 10%;
+    
+    --popover: 35 30% 98%;
+    --popover-foreground: 0 0% 10%;
+    
+    --primary: 25 90% 50%; /* Orange */
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 35 30% 85%;
+    --secondary-foreground: 0 0% 10%;
+    
+    --muted: 35 10% 80%;
+    --muted-foreground: 0 0% 40%;
+    
+    --accent: 25 90% 50%;
+    --accent-foreground: 0 0% 100%;
+    
+    --border: 25 30% 80%;
+    --input: 35 30% 98%;
+    --ring: 25 90% 50%;
+    
+    --sidebar-background: 35 30% 92%;
+    --sidebar-foreground: 0 0% 10%;
+  }
+
+  /* Yotsuba B (Blue/Grey) */
+  [data-theme="yotsuba-b"] {
+    --background: 210 10% 90%; /* Light Blue-Grey */
+    --foreground: 0 0% 10%;
+    
+    --card: 210 10% 85%;
+    --card-foreground: 0 0% 10%;
+    
+    --popover: 210 10% 95%;
+    --popover-foreground: 0 0% 10%;
+    
+    --primary: 220 60% 50%; /* Classic Blue */
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 210 10% 80%;
+    --secondary-foreground: 0 0% 10%;
+    
+    --muted: 210 5% 70%;
+    --muted-foreground: 0 0% 40%;
+    
+    --accent: 220 60% 50%;
+    --accent-foreground: 0 0% 100%;
+    
+    --border: 210 10% 75%;
+    --input: 210 10% 95%;
+    --ring: 220 60% 50%;
+    
+    --sidebar-background: 210 10% 88%;
+    --sidebar-foreground: 0 0% 10%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-serif), georgia, serif;
+    font-size: 10pt;
+    line-height: 1.4;
+    position: relative;
+  }
+
+  /* 4chan-style minimalist borders */
+  button,
+  input,
+  textarea,
+  select {
+    @apply border border-foreground;
+  }
+
+  /* Invisible text with 1px border effect for headers/titles */
+  .text-outline-header {
+    color: transparent;
+    -webkit-text-stroke: 1px hsl(var(--foreground));
+    text-stroke: 1px hsl(var(--foreground));
+    font-weight: bold;
+    font-family: Tahoma, sans-serif;
+  }
+
+  /* Alternative outline effect using text-shadow */
+  .text-outline-shadow {
+    color: hsl(var(--background));
+    text-shadow: 
+      -1px -1px 0 hsl(var(--foreground)),  
+      1px -1px 0 hsl(var(--foreground)),
+      -1px 1px 0 hsl(var(--foreground)),
+      1px 1px 0 hsl(var(--foreground));
+    font-weight: bold;
+    font-family: Tahoma, sans-serif;
+  }
+
+  /* 4chan-style site logo */
+  .haichan-logo {
+    font-family: Tahoma, sans-serif;
+    font-weight: bold;
+    font-size: 28px;
+    color: transparent;
+    -webkit-text-stroke: 1.5px hsl(var(--foreground));
+    text-stroke: 1.5px hsl(var(--foreground));
+    letter-spacing: 2px;
+  }
+
+  /* Simplified header without wonky effect */
+  .haichan-wonky-header {
+    font-family: Tahoma, sans-serif;
+    font-weight: bold;
+    font-size: 2rem;
+    letter-spacing: 0.05em;
+    display: inline-block;
+  }
+
+  /* Mining active indicator */
+  .mining-active {
+    animation: mining-pulse 1s ease-in-out infinite;
+  }
+
+  @keyframes mining-pulse {
+    0%, 100% {
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    }
+    50% {
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+    }
+  }
+
+  /* 4chan-style compact post styling */
+  .post-container {
+    padding: 8px 12px;
+    margin: 2px 0;
+    font-size: 10pt;
+    background-color: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+  }
+
+  .post-header {
+    font-size: 9pt;
+    margin-bottom: 6px;
+    font-weight: normal;
+  }
+
+  .post-content {
+    margin: 6px 0;
+    line-height: 1.4;
+    font-size: 10pt;
+    color: hsl(var(--foreground));
+  }
+
+  .post-number {
+    color: hsl(var(--foreground));
+    font-weight: normal;
+    text-decoration: none;
+  }
+
+  .post-number:hover {
+    text-decoration: underline;
+  }
+
+  .post-date {
+    color: hsl(var(--muted-foreground));
+    font-size: 9pt;
+  }
+
+  .post-username {
+    color: hsl(var(--primary));
+    font-weight: bold;
+    font-family: var(--font-serif), georgia, serif;
+  }
+
+  .post-tripcode {
+    color: hsl(var(--muted));
+    font-weight: normal;
+  }
+
+  /* 4chan-style navigation links */
+  .nav-link {
+    text-decoration: none;
+    color: hsl(var(--foreground));
+    padding: 2px 8px;
+    display: inline-block;
+  }
+
+  .nav-link:hover {
+    background-color: hsl(var(--primary));
+    color: hsl(var(--background));
+  }
+
+  /* Thread title styling */
+  .thread-title {
+    font-weight: bold;
+    font-size: 11pt;
+    color: hsl(var(--foreground));
+    text-decoration: none;
+  }
+
+  .thread-title:hover {
+    text-decoration: underline;
+  }
+}
+
+@layer utilities {
+  /* Yellow cursor with 1px black border for text inputs */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="search"],
+  input[type="url"],
+  input[type="number"],
+  textarea,
+  [contenteditable="true"] {
+    caret-color: hsl(var(--primary));
+    caret-shape: block;
+  }
+
+  /* Focus state with yellow outline to simulate cursor border effect */
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="password"]:focus,
+  input[type="search"]:focus,
+  input[type="url"]:focus,
+  input[type="number"]:focus,
+  textarea:focus,
+  [contenteditable="true"]:focus {
+    outline: 1px solid hsl(var(--primary));
+    outline-offset: -1px;
+  }
+
+  /* Styling for text selection in input fields */
+  input[type="text"]::selection,
+  input[type="email"]::selection,
+  input[type="password"]::selection,
+  input[type="search"]::selection,
+  input[type="url"]::selection,
+  input[type="number"]::selection,
+  textarea::selection,
+  [contenteditable="true"]::selection {
+    background-color: hsl(var(--primary) / 0.3);
+    color: hsl(var(--primary-foreground));
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 14px;
+    height: 14px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+    border: 1px solid hsl(var(--foreground));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--foreground));
+    border: 1px solid hsl(var(--background));
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground));
+  }
+
+  ::-webkit-scrollbar-corner {
+    background: hsl(var(--background));
+  }
+}
